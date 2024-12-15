@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { FileJson } from 'lucide-react';
-import { JsonInput } from './components/JsonInput';
-import { JsonOutput } from './components/JsonOutput';
-import { isValidJson, generateTemplate, formatJson } from './utils/jsonUtils';
-import type { JsonTemplateState } from './types/json';
+import { FileJson } from "lucide-react";
+import { useState } from "react";
+import { JsonInput } from "./components/JsonInput";
+import { JsonOutput } from "./components/JsonOutput";
+import type { JsonTemplateState } from "./types/json";
+import { formatJson, generateTemplate } from "./utils/jsonUtils";
 
 function App() {
   const [state, setState] = useState<JsonTemplateState>({
-    sourceJson: '',
-    templateJson: '',
+    sourceJson: "",
+    templateJson: "",
     error: null,
     isProcessing: false,
   });
 
   const handleJsonChange = (value: string) => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       sourceJson: value,
       error: null,
@@ -32,25 +32,25 @@ function App() {
 
   const handleGenerate = () => {
     try {
-      setState(prev => ({ ...prev, isProcessing: true, error: null }));
-      
+      setState((prev) => ({ ...prev, isProcessing: true, error: null }));
+
       if (!state.sourceJson.trim()) {
-        throw new Error('Please enter some JSON first');
+        throw new Error("Please enter some JSON first");
       }
 
       const parsedJson = JSON.parse(state.sourceJson);
       const template = generateTemplate(parsedJson);
       const formattedTemplate = formatJson(template);
 
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         templateJson: formattedTemplate,
         isProcessing: false,
       }));
     } catch (err) {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
-        error: err instanceof Error ? err.message : 'Invalid JSON format',
+        error: err instanceof Error ? err.message : "Invalid JSON format",
         isProcessing: false,
       }));
     }
@@ -89,9 +89,7 @@ function App() {
             </button>
           </div>
 
-          {state.templateJson && (
-            <JsonOutput value={state.templateJson} />
-          )}
+          {state.templateJson && <JsonOutput value={state.templateJson} />}
         </div>
       </div>
     </div>
