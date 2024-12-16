@@ -2,6 +2,8 @@
 
 Un générateur de modèles JSON interactif et intuitif développé avec React et TypeScript.
 
+🔗 [GitHub Pages](https://movinglive.github.io/json-template-generator/)
+
 ## 🌟 Caractéristiques
 
 - Génération automatique de modèles JSON à partir de données existantes
